@@ -1,8 +1,11 @@
 import { BotCommand } from './bot-command';
 import { Guild, GuildChannel, GuildMember, Message, VoiceChannel } from 'discord.js';
 import { cyan, yellow } from 'chalk';
+import { DateTimeLogger } from '../datetime-logger';
 
 export class SynergyCommand implements BotCommand {
+  private logger = new DateTimeLogger();
+
   public run(message: Message, args: Array<String>): void {
     if (!message.guild?.available) return;
     const connectedUser: Array<GuildMember> = this.fetchConnectedUsers(message.guild);
@@ -31,7 +34,7 @@ export class SynergyCommand implements BotCommand {
   }
 
   private moveUserToVoiceChannel(user: GuildMember, channel: GuildChannel): void {
-    console.log(`${yellow(user.displayName)} moved to ${cyan(channel.name)}`);
-    user.voice.setChannel(channel.id, 'Synergy!').catch((r) => console.log(r));
+    this.logger.log(`${yellow(user.displayName)} moved to ${cyan(channel.name)}`);
+    user.voice.setChannel(channel.id, 'Synergy!');
   }
 }

@@ -10,9 +10,11 @@ import { Client, Message } from 'discord.js';
 import { BotCommand } from './command/bot-command';
 import { SynergyCommand } from './command/synergy';
 import { blue, green, red, yellow } from 'chalk';
+import { DateTimeLogger } from './datetime-logger';
 
 const config = require('../configuration.json');
 const client = new Client();
+const logger = new DateTimeLogger();
 
 const isBotCommand: (message: String) => boolean = (message: String) => {
   return message.startsWith(config.commandPrefix);
@@ -34,11 +36,11 @@ client.on('message', (message: Message) => {
       default:
         throw new Error(`${blue.bold(commandName)} ${red('not recognized as a bot command')}`);
     }
-    console.log(`${yellow.bold(message.author.username)} run ${blue.bold(message.content)}`);
+    logger.log(`${yellow.bold(message.author.username)} run ${blue.bold(message.content)}`);
     command.run(message, args);
-    console.log(`${blue.bold(commandName)} ${green('ran successfully!')}`);
+    logger.log(`${blue.bold(commandName)} ${green('ran successfully!')}`);
   } catch (error) {
-    console.log(error.message);
+    logger.log(error.message);
   }
 });
 
