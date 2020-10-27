@@ -15,7 +15,8 @@
         "@typescript-eslint"
     ],
     "rules": {
-        "require-jsdoc": 0,
-        "object-curly-spacing":  ["error", "always"]
+        "object-curly-spacing":  ["error", "always"],
+        "max-len": ["error", { "code": 240 }],
+        "require-jsdoc": 0
     }
 }
