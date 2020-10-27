@@ -1,22 +1,45 @@
-import {Client, Message} from 'discord.js';
+// TODO: DATETIME logger
+// TODO: Inject logger
+// TODO: Color Documentation
+// TODO: Config Documentation
+// TODO: Unit tests
+// TODO: CI
+// TODO: Host
 
-const config = require('../config.json');
+import { Client, Message } from 'discord.js';
+import { BotCommand } from './command/bot-command';
+import { SynergyCommand } from './command/synergy';
+import { blue, green, red, yellow } from 'chalk';
 
+const config = require('../configuration.json');
 const client = new Client();
 
-const prefix = '!';
+const isBotCommand: (message: String) => boolean = (message: String) => {
+  return message.startsWith(config.commandPrefix);
+};
 
-client.on('message', function(message: Message) {
+client.on('message', (message: Message) => {
   if (message.author.bot) return;
-  if (!message.content.startsWith(prefix)) return;
-
-  const commandBody = message.content.slice(prefix.length);
+  if (!isBotCommand(message.content)) return;
+  // TODO: Refactor to another method + create bot args interface
+  const commandBody = message.content.slice(config.commandPrefix.length);
   const args = commandBody.split(' ');
-  const command = args.shift()!.toLowerCase();
-
-  if (command === 'hello') {
-    message.reply(`world`);
+  const commandName = args.shift()!.toLowerCase();
+  let command: BotCommand;
+  try {
+    switch (commandName) {
+      case 'synergy':
+        command = new SynergyCommand();
+        break;
+      default:
+        throw new Error(`${blue.bold(commandName)} ${red('not recognized as a bot command')}`);
+    }
+    console.log(`${yellow.bold(message.author.username)} run ${blue.bold(message.content)}`);
+    command.run(message, args);
+    console.log(`${blue.bold(commandName)} ${green('ran successfully!')}`);
+  } catch (error) {
+    console.log(error.message);
   }
 });
 
-client.login(config.BOT_TOKEN);
+client.login(config.discordBotToken);
