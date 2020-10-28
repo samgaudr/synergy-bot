@@ -24,7 +24,7 @@ export class SynergyBot {
         default:
           throw new Error(`${blue.bold(commandName)} ${red('not recognized as a bot command')}`);
       }
-      this.logger.log(`${yellow.bold(message.author.username)} run ${blue.bold(message.content)}`);
+      this.logger.log(`${yellow.bold(message.author.username)} run ${blue.bold(commandName)}`);
       command.run(message);
       this.logger.log(`${blue.bold(commandName)} ${green('ran successfully!')}`);
     } catch (error) {

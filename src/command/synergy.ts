@@ -1,6 +1,6 @@
 import { BotCommand } from './bot-command';
 import { Guild, GuildChannel, GuildMember, Message, VoiceChannel } from 'discord.js';
-import { cyan, yellow } from 'chalk';
+import { magenta, yellow } from 'chalk';
 import { DateTimeLogger } from '../datetime-logger';
 import { injectable } from 'tsyringe';
 
@@ -37,7 +37,7 @@ export class SynergyCommand implements BotCommand {
   }
 
   private moveUserToVoiceChannel(user: GuildMember, channel: GuildChannel): void {
-    this.logger.log(`${yellow(user.displayName)} moved to ${cyan(channel.name)}`);
+    this.logger.log(`${yellow(user.displayName)} moved to ${magenta(channel.name)}`);
     user.voice.setChannel(channel.id, 'Synergy!');
   }
 
