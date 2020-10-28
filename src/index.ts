@@ -1,47 +1,28 @@
-// TODO: DATETIME logger
-// TODO: Inject logger
 // TODO: Color Documentation
 // TODO: Config Documentation
 // TODO: Unit tests
 // TODO: CI
 // TODO: Host
 
+import { green, red } from 'chalk';
 import { Client, Message } from 'discord.js';
-import { BotCommand } from './command/bot-command';
-import { SynergyCommand } from './command/synergy';
-import { blue, green, red, yellow } from 'chalk';
+import 'reflect-metadata';
+import { container } from 'tsyringe';
 import { DateTimeLogger } from './datetime-logger';
+import { SynergyBot } from './synergy-bot';
 
 const config = require('../configuration.json');
-const client = new Client();
-const logger = new DateTimeLogger();
+container.register('SynergyBotConfiguration', { useValue: config });
 
-const isBotCommand: (message: String) => boolean = (message: String) => {
-  return message.startsWith(config.commandPrefix);
-};
+const discordClient = new Client();
+const synergyBot: SynergyBot = container.resolve(SynergyBot);
+const logger = container.resolve(DateTimeLogger);
 
-client.on('message', (message: Message) => {
-  if (message.author.bot) return;
-  if (!isBotCommand(message.content)) return;
-  // TODO: Refactor to another method + create bot args interface
-  const commandBody = message.content.slice(config.commandPrefix.length);
-  const args = commandBody.split(' ');
-  const commandName = args.shift()!.toLowerCase();
-  let command: BotCommand;
-  try {
-    switch (commandName) {
-      case 'synergy':
-        command = new SynergyCommand();
-        break;
-      default:
-        throw new Error(`${blue.bold(commandName)} ${red('not recognized as a bot command')}`);
-    }
-    logger.log(`${yellow.bold(message.author.username)} run ${blue.bold(message.content)}`);
-    command.run(message, args);
-    logger.log(`${blue.bold(commandName)} ${green('ran successfully!')}`);
-  } catch (error) {
-    logger.log(error.message);
-  }
-});
+logger.log('Setting up Synergy bot');
 
-client.login(config.discordBotToken);
+discordClient.on('message', (message: Message) => synergyBot.receiveMessage(message));
+
+discordClient.login(config.discordBotToken)
+    .catch((error) => logger.log(red(error)))
+    .then((token) => token && logger.log(green(`Successfully logged in (token=${token})`)));
+
