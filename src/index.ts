@@ -1,5 +1,3 @@
-// TODO: Color Documentation
-// TODO: Config Documentation
 // TODO: Unit tests
 // TODO: CI
 // TODO: Host

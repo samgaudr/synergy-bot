@@ -2,7 +2,7 @@ import { blue, green, red, yellow } from 'chalk';
 import { Message } from 'discord.js';
 import { container, inject, injectable } from 'tsyringe';
 import { BotCommand } from './command/bot-command';
-import { SynergyCommand } from './command/synergy';
+import { SynergyCommand } from './command/synergy-command';
 import { DateTimeLogger } from './datetime-logger';
 import { SynergyBotConfiguration } from './synergy-bot-configuration';
 
