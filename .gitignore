@@ -39,4 +39,4 @@ typings/
 .env.test
 
 # Configuration file
-configuration.json
+synergy.conf.json
