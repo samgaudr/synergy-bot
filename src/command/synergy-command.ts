@@ -1,13 +1,13 @@
-import { BotCommand } from './bot-command';
 import { Guild, GuildChannel, GuildMember, Message, VoiceChannel } from 'discord.js';
-import { DateTimeLogger } from '../datetime-logger';
 import { injectable } from 'tsyringe';
 import { channelColor, userColor } from '../chalk-theme';
+import { DateTimeLogger } from '../datetime-logger';
+import { BotCommand } from './bot-command';
 
 @injectable()
 export class SynergyCommand implements BotCommand {
 
-  constructor(private logger: DateTimeLogger) {}
+  constructor(private logger: DateTimeLogger) { }
 
   public run(message: Message): void {
     if (!message.guild?.available) return;

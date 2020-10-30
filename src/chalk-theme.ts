@@ -1,4 +1,4 @@
-import { green, red, blue, yellow, magenta, cyan } from 'chalk';
+import { blue, cyan, green, magenta, red, yellow } from 'chalk';
 
 export const successColor = green;
 export const errorColor = red;
