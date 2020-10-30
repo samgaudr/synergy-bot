@@ -1,11 +1,11 @@
-import { cyan } from 'chalk';
 import { injectable } from 'tsyringe';
+import { dateColor } from './chalk-theme';
 
 @injectable()
 export class DateTimeLogger {
 
   public log(message: String) {
-    console.log(cyan(`[${new Date().toISOString()}]`), message);
+    console.log(dateColor(`[${new Date().toISOString()}]`), message);
   }
 
 }
