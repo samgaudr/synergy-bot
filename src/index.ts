@@ -1,5 +1,3 @@
-// TODO: Unit tests
-
 import { Client, Message } from 'discord.js';
 import 'reflect-metadata';
 import { container } from 'tsyringe';
