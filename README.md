@@ -7,10 +7,24 @@ The Synergy's official Discord bot.
 1. Add bot to application in Discord
 1. Invite bot in test channel
 1. Get bot token
-1. Add config file to project
+1. Add [config file](#config) to project
 1. Run `npm run build && node dist/index.js` to run the bot on the local wokstation in production mode.
 
 [More information on discord bot](https://discordpy.readthedocs.io/en/latest/discord.html)
+
+## Bot configuration
+
+The configuration can be stored in multiple way, in order of priority:
+1. A JSON string in an environment variable named `SNRG_CONFIG`
+1. In a file `synergy.config.json`.
+
+### Config example <a name="config"></a>
+```json
+{
+    "commandPrefix": "!",
+    "discordBotToken": "<discord-bot-token>"
+}
+```
 
 ## Development
 ### Logger Color Code
