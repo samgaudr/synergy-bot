@@ -29,11 +29,11 @@ The configuration can be stored in multiple way, in order of priority:
 ## Development
 ### Logger Color Code
 
-| Color                                                            | Log Item           |
-| ---------------------------------------------------------------- | ------------------ |
-| ![](https://via.placeholder.com/15/008000/000000?text=+) green   | Success message    |
-| ![](https://via.placeholder.com/15/FF0000/000000?text=+) red     | Error message      |
-| ![](https://via.placeholder.com/15/0000FF/000000?text=+) blue    | Command name       |
-| ![](https://via.placeholder.com/15/FFFF00/000000?text=+) yellow  | User name or ID    |
-| ![](https://via.placeholder.com/15/FF00FF/000000?text=+) magenta | Channel Name or ID |
-| ![](https://via.placeholder.com/15/00FFFF/000000?text=+) cyan    | Date or Datetime   |
+| Color                                                            | Log Item           | function     |
+| ---------------------------------------------------------------- | ------------------ | ------------ |
+| ![](https://via.placeholder.com/15/008000/000000?text=+) green   | Success message    | successColor |
+| ![](https://via.placeholder.com/15/FF0000/000000?text=+) red     | Error message      | errorColor   |
+| ![](https://via.placeholder.com/15/0000FF/000000?text=+) blue    | Command name       | commandColor |
+| ![](https://via.placeholder.com/15/FFFF00/000000?text=+) yellow  | User name or ID    | userColor    |
+| ![](https://via.placeholder.com/15/FF00FF/000000?text=+) magenta | Channel Name or ID | channelColor |
+| ![](https://via.placeholder.com/15/00FFFF/000000?text=+) cyan    | Date or Datetime   | dateColor    |
