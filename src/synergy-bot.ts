@@ -13,7 +13,7 @@ export class SynergyBot {
 
   public receiveMessage(message: Message): void {
     if (this.messageIsFromBot(message)) return;
-    if (!this.isBotCommand(message.content)) return;
+    if (!this.messageStartWithPrefix(message.content)) return;
     const commandName: String = this.extractCommandFromMessage(message);
     let command: BotCommand;
     try {
@@ -32,7 +32,7 @@ export class SynergyBot {
     }
   }
 
-  private isBotCommand(message: String): boolean {
+  private messageStartWithPrefix(message: String): boolean {
     return message.startsWith(this.botConfig.commandPrefix);
   };
 
